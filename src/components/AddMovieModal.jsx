@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Modal, ModalHeader, ModalBody, ModalFooter, Button, Input, Label, FormGroup, Form } from 'reactstrap';
 
-const initialState = { title: '', description: '', posterURL: '', rating: '' };
+const initialState = { title: '', description: '', posterURL: '', rating: '', trailerURL: '' };
 
 function AddMovieModal({ isOpen, toggle, onAdd }) {
   const [form, setForm] = useState(initialState);
@@ -55,6 +55,16 @@ function AddMovieModal({ isOpen, toggle, onAdd }) {
               value={form.posterURL}
               onChange={handleChange}
               placeholder="https://..."
+            />
+          </FormGroup>
+          <FormGroup>
+            <Label for="trailerURL">Trailer URL (embed link)</Label>
+            <Input
+              id="trailerURL"
+              name="trailerURL"
+              value={form.trailerURL}
+              onChange={handleChange}
+              placeholder="https://www.youtube.com/embed/..."
             />
           </FormGroup>
           <FormGroup>

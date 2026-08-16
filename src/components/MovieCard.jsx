@@ -1,8 +1,20 @@
+import { useNavigate } from 'react-router-dom';
 import { Card, CardBody, CardTitle, CardText, Button, Badge } from 'reactstrap';
 
 function MovieCard({ movie, onDelete }) {
+  const navigate = useNavigate();
+
+  const handleDelete = (e) => {
+    e.stopPropagation();
+    onDelete(movie.id);
+  };
+
   return (
-    <Card className="mb-3 shadow-sm h-100">
+    <Card
+      className="mb-3 shadow-sm h-100"
+      style={{ cursor: 'pointer' }}
+      onClick={() => navigate(`/movies/${movie.id}`)}
+    >
       <img
         src={movie.posterURL || 'https://via.placeholder.com/300x450?text=No+Poster'}
         alt={movie.title}
@@ -16,7 +28,7 @@ function MovieCard({ movie, onDelete }) {
         <CardText className="text-muted small flex-grow-1">
           {movie.description}
         </CardText>
-        <Button color="danger" size="sm" onClick={() => onDelete(movie.id)}>
+        <Button color="danger" size="sm" onClick={handleDelete}>
           Delete
         </Button>
       </CardBody>

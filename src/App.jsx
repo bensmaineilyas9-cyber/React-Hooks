@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import { Container, Button } from 'reactstrap';
+import { Routes, Route } from 'react-router-dom';
 import Filter from './components/Filter';
 import MovieList from './components/MovieList';
 import AddMovieModal from './components/AddMovieModal';
+import MovieDetail from './components/MovieDetail';
 
 const initialMovies = [
   {
@@ -11,6 +13,7 @@ const initialMovies = [
     description: 'A thief who steals corporate secrets through dream-sharing technology.',
     posterURL: 'https://m.media-amazon.com/images/M/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_.jpg',
     rating: 5,
+    trailerURL: 'https://www.youtube.com/embed/YoHD9XEInc0',
   },
   {
     id: 2,
@@ -18,6 +21,7 @@ const initialMovies = [
     description: 'Batman faces the Joker, a criminal mastermind who plunges Gotham into anarchy.',
     posterURL: 'https://m.media-amazon.com/images/M/MV5BMTMxNTMwODM0NF5BMl5BanBnXkFtZTcwODAyMTk2Mw@@._V1_.jpg',
     rating: 5,
+    trailerURL: 'https://www.youtube.com/embed/EXeTwQWrcwY',
   },
   {
     id: 3,
@@ -25,6 +29,7 @@ const initialMovies = [
     description: 'A team of explorers travel through a wormhole in space to ensure humanitys survival.',
     posterURL: 'https://m.media-amazon.com/images/M/MV5BYzdjMDAxZGItMjI2My00ODA1LTlkNzItOWFjMDU5ZDJlYWY3XkEyXkFqcGc@._V1_.jpg',
     rating: 4,
+    trailerURL: 'https://www.youtube.com/embed/zSWdZVtXT7E',
   },
 ];
 
@@ -50,7 +55,7 @@ function App() {
     return matchesTitle && matchesRating;
   });
 
-  return (
+  const home = (
     <Container className="py-4">
       <div className="d-flex justify-content-between align-items-center mb-4">
         <h2 className="mb-0">My Movie List</h2>
@@ -70,6 +75,13 @@ function App() {
 
       <AddMovieModal isOpen={modalOpen} toggle={toggleModal} onAdd={handleAdd} />
     </Container>
+  );
+
+  return (
+    <Routes>
+      <Route path="/" element={home} />
+      <Route path="/movies/:id" element={<MovieDetail movies={movies} />} />
+    </Routes>
   );
 }
 
